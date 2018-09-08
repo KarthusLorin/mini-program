@@ -1,1 +1,19 @@
 /* pages/classic/classic.wxss */
+
+.chunk {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+}
+
+.color1 {
+  background-color: brown;
+}
+
+.color2 {
+  background-color: aqua;
+}
+
+.color3 {
+  background-color: blue
+}
