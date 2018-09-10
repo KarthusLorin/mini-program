@@ -1,7 +1,13 @@
 /* pages/classic/classic.wxss */
+.container {
+  display: flex;
+  flex-direction: column-reverse;
+  height:400px;
+  justify-content: flex-end;
+  background-color: #999;
+}
 
 .chunk {
-  display: inline-block;
   width: 100px;
   height: 100px;
 }
