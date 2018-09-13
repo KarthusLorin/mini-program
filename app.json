@@ -3,7 +3,7 @@
     "pages/classic/classic"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#ffff00",
+    "navigationBarBackgroundColor": "#ffffff",
     "navigationBarTitleText": "旧岛",
     "navigationBarTextStyle": "black",
     "navigationStyle": "default",
