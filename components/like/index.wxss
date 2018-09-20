@@ -16,6 +16,6 @@
   line-height: 24rpx;
   color: #bbb;
   position: relative;
-  /* bottom: 10rpx;
-  left: 6rpx; */
+  bottom: 10rpx;
+  left: 6rpx;
 }
