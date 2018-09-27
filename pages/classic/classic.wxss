@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  height: 100rpx;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.epsoide {
+  margin-left: 20rpx;
+  margin-top: 4rpx;
+}
+
+.like {
+  margin-top: 6rpx;
+}

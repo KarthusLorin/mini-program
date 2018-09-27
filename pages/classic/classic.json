@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "v-like": "/components/like/index",
-    "v-movie": "/components/classic/movie/index"
+    "v-movie": "/components/classic/movie/index",
+    "v-epsoide": "/components/epsoide/index"
   }
 }
