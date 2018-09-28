@@ -1,6 +1,6 @@
 import {classicBeh} from '../classic-beh.js'
-
 Component({
+
   behaviors: [classicBeh],
   /**
    * 组件的属性列表
