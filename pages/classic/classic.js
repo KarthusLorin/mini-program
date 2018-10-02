@@ -27,17 +27,27 @@ Page({
   },
 
   onLike: function (event) {
-    console.log(event)
     let behavior = event.detail.behavior
     likeModel.like(behavior, this.data.classic.id, this.data.classic.type)
   },
 
-  onNext: function (event) {
-
+  onNext () {
+    this._updateClassic('next')
   },
 
-  onPrevious: function (event) {
+  onPrevious () {
+    this._updateClassic('previous')
+  },
 
+  _updateClassic (nextOrPrevious) {
+    let index = this.data.classic.index
+    classicModel.getClassic(index, nextOrPrevious, (res) => {
+      this.setData({
+        classic: res,
+        latest: classicModel.isLatest(res.index),
+        first: classicModel.isFirst(res.index)
+      })
+    })
   },
 
   /**
