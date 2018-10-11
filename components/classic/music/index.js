@@ -20,10 +20,16 @@ Component({
     playSrc: 'images/player@play.png'
   },
 
+  attached () {
+    this._recoverStatus()
+    this._monitorSwitch()
+  },
+
   /**
    * 组件的方法列表
    */
   methods: {
+    // 播放
     onPlay () {
       if (!this.data.playing) {
         // 切换图片
@@ -37,6 +43,34 @@ Component({
         })
         mMgr.pause()
       }
+    },
+    // 私有方法，用于控制跳页面播放
+    _recoverStatus () {
+      if (mMgr.paused) {
+        this.setData({
+          playing: false
+        })
+        return
+      }
+      if (mMgr.src === this.properties.src) {
+        this.setData({
+          playing: true
+        })
+      }
+    },
+    _monitorSwitch () {
+      mMgr.onPlay(() => {
+        this._recoverStatus()
+      })
+      mMgr.onPause(() => {
+        this._recoverStatus()
+      })
+      mMgr.onStop(() => {
+        this._recoverStatus()
+      })
+      mMgr.onEnded(() => {
+        this._recoverStatus()
+      })
     }
   }
 })
