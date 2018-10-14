@@ -1,4 +1,6 @@
-import {classicBeh} from '../classic-beh.js'
+import {
+  classicBeh
+} from '../classic-beh.js'
 
 const mMgr = wx.getBackgroundAudioManager()
 
@@ -20,7 +22,7 @@ Component({
     playSrc: 'images/player@play.png'
   },
 
-  attached () {
+  attached() {
     this._recoverStatus()
     this._monitorSwitch()
   },
@@ -30,7 +32,7 @@ Component({
    */
   methods: {
     // 播放
-    onPlay () {
+    onPlay() {
       if (!this.data.playing) {
         // 切换图片
         this.setData({
@@ -45,7 +47,7 @@ Component({
       }
     },
     // 私有方法，用于控制跳页面播放
-    _recoverStatus () {
+    _recoverStatus() {
       if (mMgr.paused) {
         this.setData({
           playing: false
@@ -58,7 +60,7 @@ Component({
         })
       }
     },
-    _monitorSwitch () {
+    _monitorSwitch() {
       mMgr.onPlay(() => {
         this._recoverStatus()
       })
