@@ -1,4 +1,9 @@
-// pages/book/book.js
+import {
+  BookModel
+} from '../../models/book.js'
+
+const bookModel = new BookModel()
+
 Page({
 
   /**
@@ -12,18 +17,22 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const promise = new Promise((resolve, reject) => {
-      wx.getSystemInfo({
-        success: res => resolve(),
-        fail: error => reject()
-      })
-    })
+    const hotList = bookModel.getHotList()
+    hotList.then(
+      res=> console.log(res)
+      )
+    // const promise = new Promise((resolve, reject) => {
+    //   wx.getSystemInfo({
+    //     success: res => resolve(),
+    //     fail: error => reject()
+    //   })
+    // })
 
-    promise.then((res) => {
-      console.log(res)
-    }, (error) => {
-      console.log(res)
-    })
+    // promise.then((res) => {
+    //   console.log(res)
+    // }, (error) => {
+    //   console.log(res)
+    // })
   },
 
   /**
