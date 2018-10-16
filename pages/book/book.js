@@ -17,22 +17,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const hotList = bookModel.getHotList()
-    hotList.then(
-      res=> console.log(res)
-      )
-    // const promise = new Promise((resolve, reject) => {
-    //   wx.getSystemInfo({
-    //     success: res => resolve(),
-    //     fail: error => reject()
-    //   })
-    // })
-
-    // promise.then((res) => {
-    //   console.log(res)
-    // }, (error) => {
-    //   console.log(res)
-    // })
+    bookModel.getHotList()
+      .then(res => {
+        console.log(res)
+        return bookModel.getMyBookCount()
+      })
+      .then(res => {
+        console.log(res)
+        return bookModel.getMyBookCount()
+      })
+      .then(res => {
+        console.log(res)
+      })
   },
 
   /**

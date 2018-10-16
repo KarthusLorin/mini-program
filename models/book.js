@@ -5,7 +5,13 @@ import {
 class BookModel extends HTTP {
     getHotList () {
         return this.request({
-            url: '/classic/hot_list'
+            url: '/book/hot_list'
+        })
+    }
+
+    getMyBookCount () {
+        return this.request({
+            url: '/book/favor/count'
         })
     }
 }
