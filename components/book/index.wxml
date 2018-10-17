@@ -1,4 +1,4 @@
-<view class="container">
+<view bind:tap="onTap" class="container">
     <image src="{{book.image}}"></image>
     <view class="description">
         <text class="tilte">{{book.tilte}}</text>
