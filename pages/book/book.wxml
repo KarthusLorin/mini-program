@@ -1,2 +1,3 @@
-<!--pages/book/book.wxml-->
-<text>pages/book/book.wxml</text>
+<block wx:for="{{books}}">
+    <v-book book="{{item}}"></v-book>
+</block>
