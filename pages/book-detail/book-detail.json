@@ -1,1 +1,5 @@
-{}
+{
+  "usingComponents": {
+    "v-tag": "/components/tag/index"
+  }
+}
