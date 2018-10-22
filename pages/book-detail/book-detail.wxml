@@ -1,3 +1,5 @@
+<wxs src="../../util/filter.wxs" module="util" />
+
 <view class="container">
   <view class="head">
     <image src="{{book.image}}"></image>
@@ -16,6 +18,6 @@
   </view>
   <view class="sub-container">
     <text class="headline">内容简介</text>
-    <text class="content">{{book.summary}}</text>
+    <text class="content" decode="{{true}}">{{util.format(book.summary)}}</text>
   </view>
 </view>
