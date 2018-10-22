@@ -6,6 +6,11 @@ var format = function (text) {
   return text.replace(reg, '\n&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;')
 }
 
+var limit = function (array, length) {
+  return array.slice(0, length)
+}
+
 module.exports = {
-  format: format
+  format: format,
+  limit: limit
 }
