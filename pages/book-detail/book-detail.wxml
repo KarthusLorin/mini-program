@@ -10,7 +10,7 @@
     <text class="headline">短评</text>
     <view class="comment-container">
       <block wx:for="{{util.limit(comments, 15)}}" wx:key="content">
-        <v-tag tag-class="{{index===0?'ex-tag1':'' || index===1?'ex-tag2':''}}" text="{{item.content}}">
+        <v-tag tag-class="{{tool.highLight(index)}}" text="{{item.content}}">
           <text class="num" slot="after">{{'+' + item.nums}}</text>
         </v-tag>
       </block>
@@ -57,10 +57,28 @@
   </view>
   <view class="comment-container">
     <block wx:for="{{util.limit(comments, 3)}}" wx:key="content">
-        <v-tag tag-class="{{index===0?'ex-tag1':'' || index===1?'ex-tag2':''}}" text="{{item.content}}">
+        <v-tag tag-class="{{tool.highLight(index)}}" text="{{item.content}}">
           <text class="num" slot="after">{{'+' + item.nums}}</text>
         </v-tag>
       </block>
   </view>
   <input class="post" placeholder="短评最多12个字"></input>
 </view>
+
+<v-mask wx:if="{{posting}}" />
+
+<wxs module="tool">
+  var highLight = function (index) {
+    if (index === 0) {
+      return 'ex-tag1'
+    }
+    if (index === 1) {
+      return 'ex-tag2'
+    }
+    return ''
+  }
+
+  module.exports= {
+    highLight: highLight
+  }
+</wxs>
