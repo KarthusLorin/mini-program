@@ -57,7 +57,7 @@
   </view>
   <view class="comment-container">
     <block wx:for="{{util.limit(comments, 3)}}" wx:key="content">
-        <v-tag tag-class="{{tool.highLight(index)}}" text="{{item.content}}">
+        <v-tag bind:tapping="onPost" tag-class="{{tool.highLight(index)}}" text="{{item.content}}">
           <text class="num" slot="after">{{'+' + item.nums}}</text>
         </v-tag>
       </block>
