@@ -69,7 +69,11 @@ Page({
   },
 
   onPost (event) {
-    const comment = event.detail.text
+    const comment = event.detail.text || event.detail.value
+
+    if (!comment) {
+      return
+    }
     
     if (comment.length > 12) {
       wx.showToast({
@@ -87,12 +91,13 @@ Page({
       })
 
       this.data.comments.unshift({
-        comment,
+        content: comment,
         nums: 1
       })
 
       this.setData({
-        comments: this.data.comments
+        comments: this.data.comments,
+        posting: false
       })
     })
   },
