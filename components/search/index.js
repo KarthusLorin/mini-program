@@ -58,6 +58,8 @@ Component({
           .then(res => {
             this.setMoreData(res.books)
             this._unLocked()
+          }, () => {
+            this._unLocked()
           })
       }
     },
