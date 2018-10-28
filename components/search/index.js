@@ -1,17 +1,19 @@
 import { KeywordModel } from '../../models/keyword.js'
 import { BookModel } from '../../models/book.js'
+import {paginationBev} from '../behaviors/pagination.js'
 
 const keymodelModel = new KeywordModel()
 const bookModel = new BookModel()
 
 Component({
+  behaviors: [paginationBev],
   /**
    * 组件的属性列表
    */
   properties: {
     more: {
       type: String,
-      observer: '_load_more'
+      observer: 'loadMore'
     }
   },
 
@@ -21,9 +23,10 @@ Component({
   data: {
     historyWords: [],
     hotWords: [],
-    dataArray: [],
     searching: false,
-    q: ''
+    q: '',
+    // 锁
+    loading: false
   },
 
   attached () {
@@ -42,32 +45,71 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    _load_more(){
-      console.log(123)
+    loadMore(){
+      if (!this.data.q) {
+        return
+      }
+      if (this._isLocked()) {
+        return
+      }
+      if (this.hasMore()) {
+        this._locked()
+        bookModel.search(this.getCurrentStart(), this.data.q)
+          .then(res => {
+            this.setMoreData(res.books)
+            this._unLocked()
+          })
+      }
     },
+
+    // 是否上锁
+    _isLocked () {
+      return this.data.loading ? true : false
+    },
+
+    // 加锁
+    _locked () {
+      this.data.loading = true
+    },
+
+    // 解锁
+    _unLocked () {
+      this.data.loading = false
+    },
+
     onCancel (event) {
       this.triggerEvent('cancel', {})
     },
 
     onDelete (event) {
-      this.setData({
-        searching: false,
-        q: ''
-      })
+      this._closeResult()
     },
 
     onConfirm (event) {
-      this.setData({
-        searching: true
-      })
+      this._showResult()
+      this.initialize()
       const q = event.detail.value || event.detail.text
       bookModel.search(0, q)
       .then(res => {
+        this.setMoreData(res.books)
+        this.setTotal(res.total)
         this.setData({
-          dataArray: res.books,
           q
         })
         keymodelModel.addToHistory(q)
+      })
+    },
+
+    _showResult () {
+      this.setData({
+        searching: true
+      })
+    },
+
+    _closeResult () {
+      this.setData({
+        searching: false,
+        q: ''
       })
     }
   }
