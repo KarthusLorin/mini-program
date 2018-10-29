@@ -26,7 +26,8 @@ Component({
     searching: false,
     q: '',
     // 锁
-    loading: false
+    loading: false,
+    loadingCenter: false
   },
 
   attached () {
@@ -71,34 +72,54 @@ Component({
 
     // 加锁
     _locked () {
-      this.data.loading = true
+      this.setData({
+        loading: true
+      })
     },
 
     // 解锁
     _unLocked () {
-      this.data.loading = false
+      this.setData({
+        loading: false
+      })
     },
 
     onCancel (event) {
+      this.initialize()
       this.triggerEvent('cancel', {})
     },
 
     onDelete (event) {
+      this.initialize()
       this._closeResult()
     },
 
     onConfirm (event) {
       this._showResult()
-      this.initialize()
+      this._showLoadingCenter()
+      // this.initialize()
       const q = event.detail.value || event.detail.text
+      this.setData({
+        q
+      })
       bookModel.search(0, q)
       .then(res => {
         this.setMoreData(res.books)
         this.setTotal(res.total)
-        this.setData({
-          q
-        })
         keymodelModel.addToHistory(q)
+        this._hideLoadingCenter()
+      })
+    },
+
+    _showLoadingCenter () {
+      this.setData({
+        loadingCenter: true
+      })
+    },
+
+    _hideLoadingCenter () {
+      this.setData({
+        loadingCenter: false
       })
     },
 
