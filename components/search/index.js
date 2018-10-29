@@ -50,38 +50,19 @@ Component({
       if (!this.data.q) {
         return
       }
-      if (this._isLocked()) {
+      if (this.isLocked()) {
         return
       }
       if (this.hasMore()) {
-        this._locked()
+        this.locked()
         bookModel.search(this.getCurrentStart(), this.data.q)
           .then(res => {
             this.setMoreData(res.books)
-            this._unLocked()
+            this.unLocked()
           }, () => {
-            this._unLocked()
+            this.unLocked()
           })
       }
-    },
-
-    // 是否上锁
-    _isLocked () {
-      return this.data.loading ? true : false
-    },
-
-    // 加锁
-    _locked () {
-      this.setData({
-        loading: true
-      })
-    },
-
-    // 解锁
-    _unLocked () {
-      this.setData({
-        loading: false
-      })
     },
 
     onCancel (event) {

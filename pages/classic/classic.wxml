@@ -1,7 +1,13 @@
 <view class="container">
     <view class="header">
         <v-episode class="epsoide" index="{{classic.index}}"></v-episode>
-        <v-like class="like" bind:like="onLike" like="{{likeStatus}}" count="{{likeCount}}" />
+        <view class="like-container">
+          <v-like class="like" bind:like="onLike" like="{{likeStatus}}" count="{{likeCount}}" />
+          <v-button class="share-btn" open-type="share">
+            <image class="share" slot="img" src="/images/icon/share.png" />
+          </v-button>
+        </view>
+        
     </view>
     <v-movie hidden="{{classic.type !== 100}}" img="{{classic.image}}" content="{{classic.content}}" />
     <v-music wx:if="{{classic.type === 200}}" img="{{classic.image}}" content="{{classic.content}}" src="{{classic.url}}" />
