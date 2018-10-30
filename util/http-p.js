@@ -2,32 +2,27 @@ import {
   config
 } from '../config.js'
 
-const tips = {
-  1: '抱歉，出现了一个错误',
-  1005: 'appkey无效',
-  3000: '期刊不存在'
-}
-
 class HTTP {
   request({
     url,
     data = {},
-    method = 'GET'
+    method = 'GET',
+    header = {}
   }) {
     return new Promise((resolve, reject) => {
-      this._request(url, resolve, reject, data, method)
+      this._request(url, resolve, reject, data, method, header)
     })
   }
-  _request(url, resolve, reject, data = {}, method = 'GET') {
+  _request(url, resolve, reject, data, method, header) {
     // url, data, method
     wx.request({
       url: config.api_base_url + url,
       method: method,
       data: data,
-      header: config.header,
+      header: Object.assign(config.header, header),
       success: (res) => {
         const code = res.statusCode.toString()
-        if (code.startsWith('2')) {
+        if (code.startsWith('2') || code === '304') {
           resolve(res.data)
         } else {
           reject()
@@ -47,9 +42,9 @@ class HTTP {
     if (!error_code) {
       error_code = 1
     }
-    const tip = tips[error_code]
+    const tip = config.tips[error_code]
     wx.showToast({
-      title: tip ? tip : tips[1],
+      title: tip ? tip : config.tips[1],
       icon: 'none',
       duration: 2000
     })
