@@ -24,10 +24,7 @@ class HTTP {
       url: config.api_base_url + url,
       method: method,
       data: data,
-      header: {
-        'content-type': 'application/json',
-        'appkey': config.appkey
-      },
+      header: config.header,
       success: (res) => {
         const code = res.statusCode.toString()
         if (code.startsWith('2')) {
