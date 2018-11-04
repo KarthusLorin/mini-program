@@ -93,6 +93,7 @@ Page({
   onGetUserInfo(event) {
     const userInfo = event.detail.userInfo
     if (userInfo) {
+      this.userAuthorized1()
       this.setData({
         userInfo,
         authorized: true
